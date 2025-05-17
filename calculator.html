@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        form{
+            border: 1px solid rgb(248, 240, 240);
+            width: 500px;
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            border-radius: 10px;
+            margin-top: 200px;
+            background-color: rgb(5, 182, 114);
+        }
+        h2{
+            font-weight: 200px;
+            text-align: center;
+            padding: 20px;
+        }
+        div{
+            margin-top: 20px;
+        }
+        .form-input input, 
+        #calculate-btn{
+            width: 450px;
+            height: 35px;
+        }
+        .form-input label{
+            font-size: 18px;
+        }
+        .form-input label, 
+        .form-input input{
+            display: block;
+            padding: 5px;
+        }
+        /*.calculate-btn{
+            font-size: 18px;
+            background-color: rgb(10, 182, 5);
+            border-radius: 5px;
+            border-color: rgb(5, 182, 114);
+        }*/
+        #result-input{
+            background-color: rgb(255, 255, 255);
+        }
+        #add-btn, #subtract-btn, #divide-btn, #multiply-btn{
+            font-size: 18px;
+            background-color: rgba(8, 131, 3, 0.644);
+            border-radius: 5px;
+            border-color: rgb(5, 182, 114);
+            width:108px;
+            padding: 5px;
+            color: white;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <div>
+            <h2>Calculator App</h2>
+        </div>
+        <div class="form-input">
+            <label> First Number</label>
+            <input type="number" name="first-number" id="first-number">
+        </div>
+        <div class="form-input">
+            <label> Second Number</label>
+            <input type="number" name="second-number" id="second-number">
+        </div>
+        <div class="calculate-btn">
+            <button type="button" id="add-btn" data-operator="+">Add</button>
+            <button type="button" id="subtract-btn" data-operator="-">Subtract</button>
+            <button type="button" id="divide-btn" data-operator="/">Divide</button>
+            <button type="button" id="multiply-btn" data-operator="*">Multiply</button>
+        </div>
+        <div class="form-input">
+            <label> Result</label>
+            <input disabled type="number" id="result-input">
+        </div>
+    </form>
+    <script>
+            function performCalculation(event) {
+                //to prevent default action of the form
+                event.preventDefault();
+                //the attribute dat-operator allows us to assign an operator to each button in the caluculator
+                const clickedButton = event.target;
+
+                let result;
+
+                const firstNumber = parseFloat(document.getElementById("first-number").value);
+                const secondNumber = parseFloat(document.getElementById("second-number").value);
+
+                switch (clickedButton.getAttribute("data-operator")) {
+                    case "+":
+                        result = firstNumber + secondNumber;
+                        break;
+                    case "-":
+                        result = firstNumber - secondNumber;
+                        break;
+                    case "/":
+                        result = firstNumber / secondNumber;
+                        break;
+                    case "*":
+                        result = firstNumber * secondNumber;
+                        break;
+                    default:
+                        console.error("Invalid Operator");
+                }
+
+                document.getElementById("result-input").value = result;
+                }
+
+
+        //call the function for each button clicked.
+        document.getElementById("add-btn").addEventListener("click", performCalculation)
+        document.getElementById("subtract-btn").addEventListener("click", performCalculation)
+        document.getElementById("multiply-btn").addEventListener("click", performCalculation)
+        document.getElementById("divide-btn").addEventListener("click", performCalculation)
+    </script>
+</body>
+</html>
